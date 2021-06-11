@@ -45,7 +45,7 @@ namespace AutoMapperSamples
         [Test]
         public void Mapped_Stanley_Has_Manager_Name()
         {
-            var mapper = new Mapper(Configurators.AutoMapper());
+            var mapper = new Mapper(Configurators.GetSingletonConfiguration());
 
             // use AutoMapper to construct Flat Stanley
             var flatStanley = mapper.Map<FlatStanley>(_stanley);

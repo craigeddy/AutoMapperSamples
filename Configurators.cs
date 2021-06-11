@@ -6,10 +6,10 @@ namespace AutoMapperSamples
 {
     public static class Configurators
     {
-        //private static MapperConfiguration _config;
+        private static MapperConfiguration _config;
 
         /// <summary>
-        /// Create or return the <see cref="MapperConfiguration"/>
+        /// Create the <see cref="MapperConfiguration"/>
         /// </summary>
         /// <returns></returns>
         public static MapperConfiguration AutoMapper()
@@ -21,6 +21,24 @@ namespace AutoMapperSamples
                     .ForMember(d => d.City,
                         opt => opt.MapFrom(src => src.Address.City))
             );
+        }
+
+        /// <summary>
+        /// Only create the <see cref="MapperConfiguration"/> once...
+        /// </summary>
+        /// <returns></returns>
+        public static MapperConfiguration GetSingletonConfiguration()
+        {
+            if (_config != null) return _config;
+
+            _config = new MapperConfiguration(cfg =>
+                cfg.CreateMap<Employee, FlatStanley>()
+                    .ForMember(d => d.Name,
+                        opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+                    .ForMember(d => d.City,
+                        opt => opt.MapFrom(src => src.Address.City)));
+
+            return _config;
         }
     }
 }
