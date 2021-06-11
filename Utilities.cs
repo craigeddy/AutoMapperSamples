@@ -10,12 +10,12 @@ namespace AutoMapperSamples
             var flat = new FlatStanley
             {
                 Name = $"{stanley.FirstName} {stanley.LastName}", 
-                ManagerFirstName = stanley.Manager?.FirstName
+                ManagerLastName = stanley.Manager?.LastName
             };
 
             if (!forgetfulDeveloper)
             {
-                flat.ManagerLastName = stanley.Manager?.LastName;
+                flat.ManagerFirstName = stanley.Manager?.FirstName;
             }
 
             flat.Address = $"{stanley.Address}";
